@@ -1,14 +1,13 @@
 const express = require('express');
 const tourController = require('./../controllers/tourController');
-// const {getALLTours,getTour} = require('./../controllers/tourController'); // we can also do it.
 const router = express.Router();
-// param Middleware:
-router.param('id', tourController.checkID);
+
+router.route('/top-5-cheap').get(tourController.aliasTopTours, tourController.getALLTours);
 
 router
   .route('/')
   .get(tourController.getALLTours)
-  .post(tourController.checkBody, tourController.createTour);
+  .post(tourController.createTour); //checkbody is middleware
 
 router
   .route('/:id')
